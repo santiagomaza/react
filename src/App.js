@@ -3,8 +3,9 @@ import Navbar from './components/Navbar/Navbar';
 import Footer from './components/Footer/Footer'
 import Cards from './components/Cards/Cards';
 import Alert from './components/Alerts/Alert';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import NewCard from './components/NewCard/NewCard';
+import axios from 'axios';
 
 function App() {
 
@@ -24,6 +25,18 @@ function App() {
   const showMsg = () => {
     setMsg(!msg)
   }
+
+  const [student, setStudent] = useState({})
+
+  useEffect(() => {
+    axios.get("https://jsonplaceholder.typicode.com/posts/1")
+    .then((response) => {
+      setStudent(response.data)
+    })
+    .catch((err) => {
+      console.log(err)
+    })
+  }, [])
 
   return (
     <div className="App">
@@ -46,6 +59,10 @@ function App() {
       <div className='mt-3 d-flex justify-content-center flex-column align-items-center'>
         <NewCard student='Santiago' info='Student information' grade={2} />
         <NewCard student='Santiago' info='Student information' />
+      </div>
+      <div className='m-3'>
+        <p className='text-center'><span className='fw-bold'>Title: </span>{student.title}</p>
+        <p><span className='fw-bold'>Body: </span>{student.body}</p>
       </div>
       <Footer />
     </div>
