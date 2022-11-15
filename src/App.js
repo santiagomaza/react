@@ -4,6 +4,7 @@ import Footer from './components/Footer/Footer'
 import Cards from './components/Cards/Cards';
 import Alert from './components/Alerts/Alert';
 import { useState } from 'react';
+import NewCard from './components/NewCard/NewCard';
 
 function App() {
 
@@ -27,18 +28,24 @@ function App() {
   return (
     <div className="App">
       <Navbar title='Title' />
-      <div className='d-flex justify-content-center'>
+      <div className='d-flex justify-content-center text-center'>
       {
         arrayInformation.map(person => <Cards name = {person.name} image = {person.image} />)
       }
       </div>
-      <div>
-        <button type='button' className='btn btn-primary mb-3' onClick={showMsg}>Click on me to show the message!</button>
+      <div className='d-flex justify-content-center mb-2'> 
+        <button type='button' className='btn btn-primary' onClick={showMsg}>Click on me to show the message!</button>
+      </div>
+      <div className='d-flex justify-content-center'>
         {
           msg === true ?
           <Alert message="Hello people!" /> : 
           ''
         }
+      </div>
+      <div className='mt-3 d-flex justify-content-center flex-column align-items-center'>
+        <NewCard student='Santiago' info='Student information' grade={2} />
+        <NewCard student='Santiago' info='Student information' />
       </div>
       <Footer />
     </div>
